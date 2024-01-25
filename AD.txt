@@ -1,0 +1,24 @@
+1#LISTAR UN UNIDADES ORGANIZATIVAS
+Get-ADOrganizationalUnit -Filter * -SearchBase "DC=JuanJose2324,DC=sistemas" | Select-Object name | Out-Host
+
+2#CREAR UNIDAD ORGANIZATIVA
+New-ADOrganizationalUnit -Name $nombreOU -Path $path(DOMINIO)
+
+3#LISTAR USUARIO DE AD
+Get-ADuser -Filter * -SearchBase "DC=JuanJose2324,DC=sistemas" | Select-Object name | Out-Host
+
+4#CREAR USUARIOS EN AD
+New-ADUser -Name $nombreUsuario -SamAccountName $nombreUsuario -Enabled $true -AccountPassword (ConvertTo-SecureString $contrasenaUsuario -AsPlainText -Force)
+
+
+5#LISTAR GRUPOS
+Get-ADgroup -Filter * -SearchBase "DC=JuanJose2324,DC=sistemas" | Select-Object name | Out-Host
+
+6#CREAR UN GRUPO
+New-ADGroup -Name $nombreGrupo -SamAccountName $nombreGrupo -GroupScope Global -GroupCategory Security -Path $path2(DOMINIO CON UO)
+
+7#AGREGAR MIEMBRO AL GRUPO
+Add-ADGroupMember -Identity $nombreGrupo -Members $nombreUsuario
+
+8#ELIMINAR MIEMBRO DEL GRUPO
+Remove-ADGroupMember -Identity $grupoObj -Members $usuarioObj

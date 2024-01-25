@@ -1,0 +1,25 @@
+¡¡¡MININO 3 DISCOS, UNO PARA PARIDAD!!!
+
+1#INFORMACION DEL DISCO. Primero crear una variable para el nº de disco
+Get-PhysicalDisk | Select-Object DeviceID, MediaType, Size | where {$_.DeviceID -eq $numdisk}
+
+2#OBTENER EL ESPACIO DEL DISCO EN GB
+$gb =  (Get-Disk -Number $numdisk | Select-Object Size).Size /1GB
+Write-Host "Tamaño del disco $($disco.DeviceID): $gb GB"
+
+3#COMANDOS DE DISKPART PARA EL SCRIPT
+
+    select disk $numdisk
+    clean
+    convert dynamic
+    select disk $numdisk2
+    clean
+    convert dynamic
+    select disk $numdisk3
+    clean
+    convert dynamic
+    select disk $numdisk
+    create volume raid disk=$numdisk,$numdisk2,$numdisk3
+    format fs=ntfs quick
+
+EJECUTAR | diskpart <--

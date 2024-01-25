@@ -1,0 +1,46 @@
+###########################################################
+USUARIOS
+---------
+
+1#LISTAR LOS USUARIOS LOCALES
+Get-LocalUser | Select-Object name | Out-Host
+
+2#CREAR NUEVO USUARIO
+New-LocalUser
+
+3#ELIMINAR UN USUARIO
+Remove-LocalUser $usuario
+
+
+4#MODIFICAR USUARIO
+Rename-LocalUser $usuario -NewName $nombre 
+Set-LocalUser -Name $nuevonombre -Password (ConvertTo-SecureString $contraseña -AsPlainText -Force)
+
+
+
+
+###########################################################3
+GRUPOS
+------
+
+1#LISTAR GRUPOS
+Get-LocalGroup | Select-Object name | Out-Host
+
+
+2#VER MIEMBROS DE UN GRUPO
+Get-LocalGroupMember | Select-Object name | Out-Host
+
+
+3#CREAR NUEVO GRUPO
+New-LocalGroup $nombre
+
+
+4#ELIMINAR UN GRUPO
+Remove-LocalGroup -Confirm $nombre
+
+5#CREAR MIEMBRO DEL GRUPO
+New-LocalUser $nombreuser -Password $contra (-AsSecureString)
+Add-LocalGroupMember $nombregrupo -Member $nombreuser
+
+6#ELIMINAR MIEBRO DEL GRUPO
+Remove-LocalGroupMember $nombregrupo -Member $nombreuser
