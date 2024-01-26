@@ -16,7 +16,8 @@ Remove-LocalUser $usuario
 Rename-LocalUser $usuario -NewName $nombre 
 Set-LocalUser -Name $nuevonombre -Password (ConvertTo-SecureString $contraseña -AsPlainText -Force)
 
-
+#OPCION PARA VER USUARIOS Y GRUPOS EN GRAFICO
+Invoke-Item "$env:SystemRoot\System32\lusrmgr.msc"
 
 
 ###########################################################3
